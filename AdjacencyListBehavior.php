@@ -18,6 +18,9 @@ class AdjacencyListBehavior extends CActiveRecordBehavior
     const CHILDREN = 'children';
     const BOTH     = 'both';
 
+    public $parentRelation = self::PARENT;
+    public $childrenRelation = self::CHILDREN;
+
     public $hasLevel = false;
     public $hasWeight = false;
     public $parentAttribute = 'parent_id';
@@ -169,7 +172,7 @@ class AdjacencyListBehavior extends CActiveRecordBehavior
         /**
          * Return the record using already defined relationship, fall back to Yii AR handling
          */
-        return $this->getOwner()->{self::PARENT};
+        return $this->getOwner()->{$this->parentRelation};
     }
 
     /**
@@ -181,7 +184,7 @@ class AdjacencyListBehavior extends CActiveRecordBehavior
         /**
          * Return the record using already defined relationship, fall back to Yii AR handling
          */
-        return $this->getOwner()->{self::CHILDREN};
+        return $this->getOwner()->{$this->childrenRelation};
     }
 
     /**
@@ -205,7 +208,7 @@ class AdjacencyListBehavior extends CActiveRecordBehavior
     /**
      * Update node if it's not new.
      * @return boolean whether the saving succeeds
-     */
+
     public function save($runValidation = true, $attributes = null)
     {
         $owner = $this->getOwner();
@@ -228,7 +231,7 @@ class AdjacencyListBehavior extends CActiveRecordBehavior
     public function saveNode($runValidation = true, $attributes = null)
     {
         return $this->save($runValidation, $attributes);
-    }
+    }*/
 
     /**
      * Deletes node and it's descendants.
@@ -314,7 +317,7 @@ class AdjacencyListBehavior extends CActiveRecordBehavior
         );
     }
 
-    public function beforeSave($event)
+    /*public function beforeSave($event)
     {
         if ($this->_ignoreEvent) {
             return true;
@@ -344,5 +347,5 @@ class AdjacencyListBehavior extends CActiveRecordBehavior
 
     private function correctCachedOnAddNode()
     {
-    }
+    }*/
 }
